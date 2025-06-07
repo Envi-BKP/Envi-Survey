@@ -315,8 +315,48 @@
 
     
 
-    function printPDF() {
-      window.print();
+    async function printPDF() {
+        const { jsPDF } = window.jspdf;
+
+        // ซ่อนปุ่มก่อน capture
+        document.querySelectorAll('.box_button, .btn-group, button').forEach(el => el.style.display = 'none');
+
+        // ใช้ html2canvas capture element ที่ต้องการ (เช่น #content)
+        const content = document.getElementById('content');
+        const canvas = await html2canvas(content, {
+            scale: 2, // ความละเอียดสูงขึ้น
+            useCORS: true
+        });
+
+        // สร้าง PDF
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+
+        // คำนวณขนาดภาพ
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pageWidth;
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+        let position = 0;
+
+        // ถ้า content ยาวกว่าหน้าเดียว → แบ่งหน้า
+        pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+        
+        if (pdfHeight > pageHeight) {
+            while (position + pageHeight < pdfHeight) {
+                position -= pageHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+            }
+        }
+
+        // download PDF
+        pdf.save('แบบสำรวจสิ่งแวดล้อม.pdf');
+
+        // คืนปุ่มหลัง capture
+        document.querySelectorAll('.box_button, .btn-group, button').forEach(el => el.style.display = '');
     }
   </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -350,4 +390,7 @@ dateHidden.addEventListener('change', () => {
 </script>
 
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </html>
