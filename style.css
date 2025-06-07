@@ -1,0 +1,165 @@
+@page {
+    size: A4;
+    margin: 10mm;
+}
+  
+body {
+    font-family: "TH Sarabun New", sans-serif;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    background: white;
+    
+}
+  
+.container {
+    width: 210mm;
+    min-height: 297mm;
+    margin: auto;
+    padding: 5mm ;
+    box-sizing: border-box;
+    background: white;
+    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+   
+}
+h1{
+    margin-top: 2px;
+}
+  
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5px;
+    
+    
+}
+  
+table, tr, th, td {
+    border: 1px solid #000;  
+}
+  
+th, td {
+    padding: 5px;
+    text-align: left;
+
+}
+
+.head-table th{
+    text-align: center;
+    font-size: 20px;
+}
+.in{
+    text-align: center;
+}
+span{
+    font-size: 20px;
+}
+   
+@media print {
+    body, html {
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        background: white;
+    }
+
+    .container {
+        box-shadow: none;
+        margin: 0;
+        padding: 0; /* ลดจาก 0 เป็น 5mm ให้ยังมีขอบ */
+        width: 100%;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        font-size: 1ุ6px; /* ลด font table */
+        padding: 3px; /* ลด padding cell */
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    span {
+        font-size: 18px;
+    }
+
+    .button, .btn-group, input[type="button"], button {
+        display: none !important;
+    }
+
+    .wrapper {
+        padding: 20px; /* ลดจาก 30px เหลือ 5px */
+    }
+
+    .underline-input {
+        font-size: 16px;
+    }
+
+    .signature-pad {
+        max-width: 250px;
+        height: 80px;
+    
+    }
+    canvas {
+        border: none;
+    }
+}
+
+  
+.signature-pad {
+        border: 1px solid #ccc;
+        width: 100%;
+        max-width: 300px;
+        height: 100px;
+       
+}
+  
+.btn-group {
+        margin-top: 10px;
+}
+  
+button {
+        padding: 8px 12px;
+        margin-right: 10px;
+}
+  
+      /* ซ่อนปุ่มตอนพิมพ์ */
+      @media print {
+        .btn-group, input, button {
+          display: none;
+        }
+  
+canvas {
+          border: none;
+        }
+}
+.inline-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem; /* ช่องว่างระหว่าง div */
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 2px;
+}
+  
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    padding: 30px;
+}
+.underline-input {
+    border: none;
+    border-bottom: 1px dotted #000;
+    outline: none;
+    width: 200px;
+}
+::placeholder{
+    padding-left: 20px;
+}
+input{
+    padding-left: 20px;
+}
+

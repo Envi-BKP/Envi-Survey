@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'/>
+    <link rel="stylesheet" href="style.css">
+    <title>แบบสำรวจสิ่งแวดล้อม (วล.02)</title>
+    
+</head>
+<body>
+    <form method="post" accept-charset="UTF-8" autocomplete="off" name="แบบสำรวจผู้แทน">
+        <div id="content">
+        
+        <div class="container">
+            <div style="text-align: right;" >วล.02 (แก้ไขครั้งที่ 03)</div><br>
+            <div class="main_title"><center><h1><b>แบบสำรวจสิ่งแวดล้อม</b></h1></center></div>
+
+            <div class="inline-group">
+                <div class="sub_title">
+                    <span for="ครั้งที่สำรวจ"><b>ครั้งที่สำรวจ :</b></span>
+                    <input class="underline-input" placeholder="เลือกครั้งที่สำรวจ" list="ครั้งที่" required autocomplete="off" id="ครั้งที่สำรวจ" name="ครั้งที่สำรวจ">
+                        <datalist id="ครั้งที่">
+                        <option value="1/ 2568">
+                        <option value="2/ 2568">
+                        <option value="3/ 2568">
+                        <option value="4/ 2568">
+                        </datalist>
+                </div>
+
+                <div class="sub_title" >
+                    <span for="date"><b>วันที่ทำการสำรวจ :</b></span>
+                    <input class="underline-input" type="text" id="date-display" placeholder="คลิ๊กเลือกวันที่" readonly>
+                    <input type="date" id="date-hidden" style="display:none;">
+                </div>
+
+                <div class="sub_title">
+                <span for="สถานที่"><b>สถานที่ :</b></span>
+                <input class="underline-input"  placeholder="เลือกสถานที่" list="หน่วยงาน" required autocomplete="off" id="สถานที่" name="สถานที่">
+                    <datalist id="หน่วยงาน">
+                        <option value="โรงอาหาร ทกท.1">
+                        <option value="โรงอาหาร ทกท.2">
+                        <option value="โรงอาหาร ทกท.3">
+                        <option value="โรงอาหาร ทกท.4">
+                        <option value="รส.3">
+                        <option value="รส.4">
+                        <option value="รส.5"> 
+                        <option value="รส.6">
+                        <option value="รส.7"> 
+                        <option value="รส.8">
+                        <option value="รส.9">
+                        <option value="รส.11">
+                        <option value="รส.13">
+                        <option value="รส.15">
+                        <option value="รส.16">
+                        <option value="รส.17">
+                        <option value="คท.">
+                        <option value="คผ.">
+                        <option value="คสร."> 
+                        <option value="คอ.">
+                        <option value="คต.">
+                        <option value="ผสท.กปส.3">
+                        <option value="ผสอ.">
+                        <option value="คตป.">
+                        <option value="คบต.">
+                        <option value="กตส.1">
+                        <option value="กตส.2">
+                        <option value="ซท.1">
+                        <option value="ซท.2">
+                        <option value="ซท.3">
+                        <option value="ปภ."> 
+                    </datalist>
+                </div>   
+            </div>
+            
+        
+            <table>
+
+                <tr class="head-table">
+                    <th rowspan="2" style="width: 12%;"><center>เรื่อง</center></th>
+                    <th rowspan="2" style="width: 25%;"><center>รายละเอียดการสำรวจ</center></th>
+                    <th colspan="3"><center>ผลการสำรวจ</center></th>
+                    <th rowspan="3"><center>แนวทางการดำเนินการแก้ไข</center></th>
+                </tr>
+                <tr class="head-table">
+                    <th style="width: 8%;">ผ่าน</th>
+                    <th style="width: 8%;">ไม่ผ่าน</th>
+                    <th style="width: 23%;">สิ่งที่พบ</th>   
+                </tr>
+
+                <tr>
+                    <th rowspan="4">1. ความสะอาด</th>
+                </tr>
+
+                <tr>
+                    <td>1.1 อาคารและบริเวณโดยรอบสะอาด</td>
+                    <td class="in"><input type="radio"  name="1.1 อาคารและบริเวณโดยรอบสะอาด" value="ผ่าน"></td>
+                    <td class="in"><input type="radio"  name="1.1 อาคารและบริเวณโดยรอบสะอาด" value="ไม่ผ่าน"></td>
+                    <td class="in"><input class="underline-input" type="text" name="1.1 สิ่งที่พบ"> </td>
+                    <td class="in"><input class="underline-input" type="text" name="1.1 แนวทางแก้ไข"> </td>
+                </tr>
+                <tr>
+                    <td>1.2 อุปกรณ์ของใช้สะอาดและอยู่ในสภาพดี</td>
+                    <td class="in"><input type="radio" name="1.2 อุปกรณ์ของใช้สะอาดและอยู่ในสภาพดี" value="ผ่าน"></td>
+                    <td class="in"><input type="radio" name="1.2 อุปกรณ์ของใช้สะอาดและอยู่ในสภาพดี" value="ไม่ผ่าน"></td>
+                    <td class="in"><input class="underline-input" type="text" name="1.2 สิ่งที่พบ"> </td>
+                    <td class="in"><input class="underline-input" type="text" name="1.2 แนวทางแก้ไข"> </td>
+                </tr>
+                <tr>
+                    <td>1.3 มีการจัดวางสิ่งของเป็นระเบียบเรียบร้อย</td>
+                    <td class="in"><input type="radio" name="1.3 มีการจัดวางสิ่งของเป็นระเบียบเรียบร้อย" value="ผ่าน"></td>
+                    <td class="in"><input type="radio" name="1.3 มีการจัดวางสิ่งของเป็นระเบียบเรียบร้อย" value="ไม่ผ่าน"></td>
+                    <td class="in"><input class="underline-input" type="text" name="1.3"> </td>
+                    <td class="in"><input class="underline-input" type="text" name="1.3 แนวทางแก้ไข"> </td>
+                </tr>
+                <tr>
+                    <th rowspan="6">2. ขยะ</th>
+                </tr>
+                <tr>
+                    <td>2.1 ที่รองรับขยะถูกหลักสุขาภิบาล</td>
+                    <td class="in"><input type="radio" name="2.1 ที่รองรับขยะถูกหลักสุขาภิบาล" value="ผ่าน"></td>
+                    <td class="in"><input type="radio" name="2.1 ที่รองรับขยะถูกหลักสุขาภิบาล" value="ไม่ผ่าน"></td>
+                    <td class="in"><input class="underline-input" type="text" name="2.1 สิ่งที่พบ"> </td>
+                    <td class="in"><input class="underline-input" type="text" name="2.1 แนวทางแก้ไข"> </td>
+                </tr>
+                <tr>
+                    <td>2.2 ที่รองรับขยะมีจำนวนเพียงพอ</td>
+                    <td class="in"><input type="radio" name="2.2 ที่รองรับขยะมีจำนวนเพียงพอ" value="ผ่าน"></td>
+                    <td class="in"><input type="radio" name="2.2 ที่รองรับขยะมีจำนวนเพียงพอ" value="ไม่ผ่าน"></td>
+                    <td class="in"><input class="underline-input" type="text" name="2.2 สิ่งที่พบ"> </td>
+                    <td class="in"><input class="underline-input" type="text" name="2.2 แนวทางแก้ไข"> </td>
+                </tr>
+                <tr>
+                    <td>2.3 มีการคัดแยกประเภทขยะ</td>
+                    <td class="in"><input type="radio" name="2.3 มีการคัดแยกประเภทขยะ" value="ผ่าน"></td>
+                    <td class="in"><input type="radio" name="2.3 มีการคัดแยกประเภทขยะ" value="ไม่ผ่าน"></td>
+                    <td class="in"><input class="underline-input" type="text" name="2.3 สิ่งที่พบ"> </td>
+                    <td class="in"><input class="underline-input" type="text" name="2.3 แนวทางแก้ไข"> </td>
+                </tr>
+                <tr>
+                    <td>2.4 มีการคัดแยกประเภทขยะ</td>
+                    <td class="in"><input type="radio" name="2.4 มีการคัดแยกประเภทขยะ" value="ผ่าน"></td>
+                    <td class="in"><input type="radio" name="2.4 มีการคัดแยกประเภทขยะ" value="ไม่ผ่าน"></td>
+                    <td class="in"><input class="underline-input" type="text" name="2.4 สิ่งที่พบ"> </td>
+                    <td class="in"><input class="underline-input" type="text" name="2.4 แนวทางแก้ไข"> </td>
+                </tr>
+                <tr>
+                    <td>2.5 ขยะไม่ส่งกลิ่นเหม็นรบกวน</td>
+                    <td class="in"><input type="radio" name="2.5 ขยะไม่ส่งกลิ่นเหม็นรบกวน" value="ผ่าน"></td>
+                    <td class="in"><input type="radio" name="2.5 ขยะไม่ส่งกลิ่นเหม็นรบกวน" value="ไม่ผ่าน"></td>
+                    <td class="in"><input class="underline-input" type="text" name="2.5 สิ่งที่พบ"> </td>
+                    <td class="in"><input class="underline-input" type="text" name="2.5 แนวทางแก้ไข"> </td>
+                </tr>
+
+                <tr>
+                    <th rowspan="4">3. น้ำเสีย</th>
+                </tr>
+                <tr>
+                    <td>3.1 ท่อ/ รางระบายน้ำอยู่ในสภาพดี ไม่อุดตัน</td>
+                    <td class="in"><input type="radio" name="3.1 ท่อ/ รางระบายน้ำอยู่ในสภาพดี ไม่อุดตัน" value="ผ่าน"></td>
+                    <td class="in"><input type="radio" name="3.1 ท่อ/ รางระบายน้ำอยู่ในสภาพดี ไม่อุดตัน" value="ไม่ผ่าน"></td>
+                    <td class="in"><input class="underline-input" type="text" name="3.1 สิ่งที่พบ"> </td>
+                    <td class="in"><input class="underline-input" type="text" name="3.1 แนวทางแก้ไข"> </td>
+                </tr>
+                <tr>
+                    <td>3.2 มีการบำบัดน้ำเสียขั้นต้น เช่น ระบบบำบัดน้ำเสีย ถังดักไขมัน</td>
+                    <td class="in"><input type="radio" name="3.2 มีการบำบัดน้ำเสียขั้นต้น เช่น ระบบบำบัดน้ำเสีย ถังดักไขมัน" value="ผ่าน"></td>
+                    <td class="in"><input type="radio" name="3.2 มีการบำบัดน้ำเสียขั้นต้น เช่น ระบบบำบัดน้ำเสีย ถังดักไขมัน" value="ไม่ผ่าน"></td>
+                    <td class="in"><input class="underline-input" type="text" name="3.2 สิ่งที่พบ"> </td>
+                    <td class="in"><input class="underline-input" type="text" name="3.2 แนวทางแก้ไข"> </td>
+                </tr>
+                <tr>
+                    <td>3.3 ระบบบำบัดน้ำเสียใช้งานได้ปกติ</td>
+                    <td class="in"><input type="radio" name="3.3 ระบบบำบัดน้ำเสียใช้งานได้ปกติ" value="ผ่าน"></td>
+                    <td class="in"><input type="radio" name="3.3 ระบบบำบัดน้ำเสียใช้งานได้ปกติ" value="ไม่ผ่าน"></td>
+                    <td class="in"><input class="underline-input" type="text" name="3.3 สิ่งที่พบ"> </td>
+                    <td class="in"><input class="underline-input" type="text" name="3.3 แนวทางแก้ไข"> </td>
+                </tr>
+                
+            </table>
+
+            <br>
+        
+           
+            <div>
+                <label for="ข้อเสนอแนะ"><b>ข้อเสนอแนะ :</b></label>
+                <input class="underline-input" style="width: 100%; box-sizing: border-box;" type="text" id="ข้อเสนอแนะ" name="ข้อเสนอแนะ">
+            </div>
+
+           
+        
+            <div class="wrapper">
+            <div class="left-box">
+                <span for="ชื่อผู้สำรวจ"><b>ชื่อผู้สำรวจ :</b></span>
+                <input class="underline-input" list="รายชื่อ" placeholder="เลือกชื่อผู้สำรวจ" required autocomplete="off" id="ชื่อผู้สำรวจ" name="ชื่อผู้สำรวจ">
+                    <datalist id="รายชื่อ">
+                        <option value="พนิตพิชา วัยคุณา">
+                        <option value="ณัทฐา ภักดีประเสริฐ">
+                        <option value="อิงกมล แสงสินชัย">    
+                        <option value="ณพล สารศาสตร์บัญชา">
+                        <option value="ธนกร อินทรีเนตร">
+                        <option value="ปฏิมา ใช้ช่ำชอง">
+                        <option value="เตวิช ธงศิลา">
+
+                    </datalist>
+                <br>
+                <span for="ตำแหน่ง"><b>ตำแหน่ง :</b></span>
+                <input class="underline-input" list="Position" placeholder="ระบุตำแหน่ง" required autocomplete="off" id="ตำแหน่ง" name="ตำแหน่ง">
+                    <datalist id="Position">
+                        <option value="หัวหน้าแผนก">
+                        <option value="ผู้ช่วยหัวหน้าแผนก">
+                        <option value="หม.ประเมินผลฯ">
+                        <option value="หม.วางแผนงานฯ">
+                        <option value="นักวิชาการ 6">
+                    </datalist>
+            </div>
+            <div class="right-box">
+                <label><b>เจ้าของสถานที่รับทราบ :</b></label>
+                <canvas id="signature-pad" class="signature-pad"></canvas><br>
+                <span for="ตำแหน่งเจ้าของสถานที่"><b>ตำแหน่ง :</b></span>
+                <input class="underline-input" list="PositionArea" placeholder="ระบุตำแหน่ง" required autocomplete="off" id="ตำแหน่งเจ้าของสถานที่" name="ตำแหน่งเจ้าของสถานที่">
+                    <datalist id="PositionArea">
+                        <option value="หัวหน้าแผนก">
+                        <option value="ผู้ช่วยหัวหน้าแผนก">
+                        <option value="หัวหน้าหมวดฯ">
+                        <option value="พนักงานการสินค้า 8">
+                        <option value="พนักงานการสินค้า 6">
+                        <option value="พนักงานการสินค้า 5">
+                    </datalist>
+                <div class="btn-group">
+                    <button type="button" onclick="clearSignature()">ล้างลายเซ็น</button>
+                    
+                </div>
+                
+            </div>
+            
+            </div>
+            <div class="box_button">
+                <button type="button" onclick="printPDF()">Print PDF</button>
+                <button type="submit">ส่งข้อมูล</button>
+            </div>
+           
+         
+         
+            
+            <p id="demo"></p>
+
+        </div>  
+        </div>
+        
+
+    </form>
+</body>
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzr8s3TGYL6ugrdisejErwPY9f4djhHLD9LP0SqvsPEiedlw04Ge_u9kEUeK3OJp6S_/exec'
+    const form = document.forms['แบบสำรวจสิ่งแวดล้อม (วล.02)']
+    
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        
+        .catch(error => console.error('Error!', error.message))
+        Swal.fire({
+            title: "บันทึกข้อมูลเรียบร้อยแล้ว",
+            icon: "success"
+    });
+    })
+</script>
+<script>
+    const namePositionMap = {
+        "เตวิช ธงศิลา": "นักวิชาการ 6",
+        "ปฏิมา ใช้ช่ำชอง": "นักวิชาการ 6",
+        "ธนกร อินทรีเนตร": "นักวิชาการ 6",
+        "ณพล สารศาสตร์บัญชา": "นักวิชาการ 6",
+        "พนิตพิชา วัยคุณา": "หัวหน้าแผนก",
+        "ณัทฐา ภักดีประเสริฐ": "ผู้ช่วยหัวหน้าแผนก",
+        "อิงกมล แสงสินชัย": "ผู้ช่วยหัวหน้าแผนก",
+    };
+
+    document.getElementById("ชื่อผู้สำรวจ").addEventListener("input", function () {
+        const selectedName = this.value;
+        const positionInput = document.getElementById("ตำแหน่ง");
+
+        if (namePositionMap[selectedName]) {
+            positionInput.value = namePositionMap[selectedName];
+        } else {
+            positionInput.value = ""; // Clear if no match
+        }
+    });
+</script>
+<script>
+    const canvas = document.getElementById('signature-pad');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+
+    canvas.addEventListener('mousedown', e => {
+      drawing = true;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+    });
+
+    canvas.addEventListener('mousemove', e => {
+      if (drawing) {
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+      }
+    });
+
+    canvas.addEventListener('mouseup', () => drawing = false);
+    canvas.addEventListener('mouseleave', () => drawing = false);
+
+    function clearSignature() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    
+
+    function printPDF() {
+      window.print();
+    }
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+    function formatThaiDate(dateStr) {
+    const months = [
+        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+        "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+    ];
+    const dateObj = new Date(dateStr);
+    const day = dateObj.getDate();
+    const month = months[dateObj.getMonth()];
+    const year = dateObj.getFullYear() + 543; // แปลงเป็น พ.ศ.
+    return `${day} ${month} ${year}`;
+}
+
+const dateDisplay = document.getElementById('date-display');
+const dateHidden = document.getElementById('date-hidden');
+
+dateDisplay.addEventListener('click', () => {
+    dateHidden.showPicker(); // เรียก date picker (เฉพาะ browser ที่รองรับ)
+});
+
+dateHidden.addEventListener('change', () => {
+    const formattedDate = formatThaiDate(dateHidden.value);
+    dateDisplay.value = formattedDate;
+});
+</script>
+
+</script>
+</html>
