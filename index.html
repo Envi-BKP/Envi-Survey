@@ -316,45 +316,122 @@
     
 
     async function printPDF() {
-        const { jsPDF } = window.jspdf;
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
 
-        // ซ่อนปุ่มก่อน capture
-        document.querySelectorAll('.box_button, .btn-group, button').forEach(el => el.style.display = 'none');
+    // 1️⃣ ส่วนหัว
+    doc.setFontSize(18);
+    doc.text('แบบสำรวจสิ่งแวดล้อม', 105, 20, { align: 'center' });
 
-        // ใช้ html2canvas capture element ที่ต้องการ (เช่น #content)
-        const content = document.getElementById('content');
-        const canvas = await html2canvas(content, {
-            scale: 2, // ความละเอียดสูง
-            useCORS: true,
-            windowWidth: content.scrollWidth,  // บังคับขนาดเต็ม
-            windowHeight: content.scrollHeight
+    doc.setFontSize(12);
+    doc.text('วล.02 (แก้ไขครั้งที่ 03)', 190, 10, { align: 'right' });
+
+    // 2️⃣ ข้อมูลทั่วไป
+    doc.setFontSize(12);
+    const date = document.getElementById("date-display").value;
+    const round = document.getElementById("ครั้งที่สำรวจ").value;
+    const location = document.getElementById("สถานที่").value;
+    const surveyor = document.getElementById("ชื่อผู้สำรวจ").value;
+    const position = document.getElementById("ตำแหน่ง").value;
+    const suggestion = document.getElementById("ข้อเสนอแนะ").value;
+
+    doc.text(`ครั้งที่สำรวจ : ${round}`, 15, 30);
+    doc.text(`วันที่ทำการสำรวจ : ${date}`, 105, 30);
+    doc.text(`สถานที่ : ${location}`, 15, 40);
+
+    // 3️⃣ สร้างตาราง autoTable
+    const tableBody = [];
+
+    // เก็บข้อมูลจาก form → ใส่ใน array
+    const items = [
+        ["1. ความสะอาด", [
+            "1.1 อาคารและบริเวณโดยรอบสะอาด",
+            "1.2 อุปกรณ์ของใช้สะอาดและอยู่ในสภาพดี",
+            "1.3 มีการจัดวางสิ่งของเป็นระเบียบเรียบร้อย"
+        ]],
+        ["2. ขยะ", [
+            "2.1 ที่รองรับขยะถูกหลักสุขาภิบาล",
+            "2.2 ที่รองรับขยะมีจำนวนเพียงพอ",
+            "2.3 มีการคัดแยกประเภทขยะ",
+            "2.4 มีการคัดแยกประเภทขยะ",
+            "2.5 ขยะไม่ส่งกลิ่นเหม็นรบกวน"
+        ]],
+        ["3. น้ำเสีย", [
+            "3.1 ท่อ/ รางระบายน้ำอยู่ในสภาพดี ไม่อุดตัน",
+            "3.2 มีการบำบัดน้ำเสียขั้นต้น เช่น ระบบบำบัดน้ำเสีย ถังดักไขมัน",
+            "3.3 ระบบบำบัดน้ำเสียใช้งานได้ปกติ"
+        ]]
+    ];
+
+    items.forEach(([section, questions]) => {
+        questions.forEach((q, index) => {
+            const pass = document.querySelector(`input[name="${q}"][value="ผ่าน"]`)?.checked ? '✔' : '';
+            const fail = document.querySelector(`input[name="${q}"][value="ไม่ผ่าน"]`)?.checked ? '✔' : '';
+            const found = document.querySelector(`input[name="${q} สิ่งที่พบ"]`)?.value || '';
+            const fix = document.querySelector(`input[name="${q} แนวทางแก้ไข"]`)?.value || '';
+
+            tableBody.push([
+                index === 0 ? section : '',  // section ใส่เฉพาะแถวแรก
+                q,
+                pass,
+                fail,
+                found,
+                fix
+            ]);
         });
+    });
 
-        // สร้าง PDF
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF('p', 'mm', 'a4');
-        const pageWidth = pdf.internal.pageSize.getWidth();
-        const pageHeight = pdf.internal.pageSize.getHeight();
+    doc.autoTable({
+        startY: 50,
+        head: [[
+            'เรื่อง',
+            'รายละเอียดการสำรวจ',
+            'ผ่าน',
+            'ไม่ผ่าน',
+            'สิ่งที่พบ',
+            'แนวทางการดำเนินการแก้ไข'
+        ]],
+        body: tableBody,
+        styles: {
+            fontSize: 12,
+            cellPadding: 4
+        },
+        headStyles: {
+            fillColor: [230, 230, 230]
+        },
+        columnStyles: {
+            1: { halign: 'left' },
+            4: { halign: 'left' },
+            5: { halign: 'left' }
+        }
+    });
 
-        // คำนวณขนาดภาพตามสัดส่วนจริง (ไม่บีบ)
-        const imgProps = pdf.getImageProperties(imgData);
-        const imgWidth = pageWidth;
-        const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
+    // 4️⃣ ข้อเสนอแนะ
+    let lastY = doc.lastAutoTable.finalY + 10;
+    doc.text(`ข้อเสนอแนะ : ${suggestion}`, 15, lastY);
 
-        // เพิ่มภาพลง PDF → ถ้าเกิน A4 → ไม่ add หน้า 2 (จะ crop auto)
-        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    // 5️⃣ ชื่อผู้สำรวจ
+    lastY += 20;
+    doc.text(`ชื่อผู้สำรวจ : ${surveyor}`, 15, lastY);
+    doc.text(`ตำแหน่ง : ${position}`, 15, lastY + 10);
 
-        // save PDF
-        pdf.save('แบบสำรวจสิ่งแวดล้อม.pdf');
+    // 6️⃣ ลายเซ็นเจ้าของสถานที่
+    const canvasSignature = document.getElementById('signature-pad');
+    const signatureImage = canvasSignature.toDataURL('image/png');
 
-        // คืนปุ่มหลัง capture
-        document.querySelectorAll('.box_button, .btn-group, button').forEach(el => el.style.display = '');
-    }
+    doc.text('เจ้าของสถานที่รับทราบ :', 105, lastY);
+    doc.addImage(signatureImage, 'PNG', 105, lastY + 5, 60, 30); // ขนาดลายเซ็น
+
+    const ownerPosition = document.getElementById("ตำแหน่งเจ้าของสถานที่").value;
+    doc.text(`ตำแหน่ง : ${ownerPosition}`, 105, lastY + 40);
+
+    // Save PDF
+    doc.save('แบบสำรวจสิ่งแวดล้อม.pdf');
+}
   </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 <script>
     function formatThaiDate(dateStr) {
     const months = [
