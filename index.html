@@ -252,21 +252,6 @@
     </form>
 </body>
 <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzr8s3TGYL6ugrdisejErwPY9f4djhHLD9LP0SqvsPEiedlw04Ge_u9kEUeK3OJp6S_/exec'
-    const form = document.forms['แบบสำรวจสิ่งแวดล้อม (วล.02)']
-    
-    form.addEventListener('submit', e => {
-      e.preventDefault()
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        
-        .catch(error => console.error('Error!', error.message))
-        Swal.fire({
-            title: "บันทึกข้อมูลเรียบร้อยแล้ว",
-            icon: "success"
-    });
-    })
-</script>
-<script>
     const namePositionMap = {
         "เตวิช ธงศิลา": "นักวิชาการ 6",
         "ปฏิมา ใช้ช่ำชอง": "นักวิชาการ 6",
@@ -287,8 +272,7 @@
             positionInput.value = ""; // Clear if no match
         }
     });
-</script>
-<script>
+
     const canvas = document.getElementById('signature-pad');
     const ctx = canvas.getContext('2d');
     let drawing = false;
@@ -313,121 +297,85 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    
-
-    async function printPDF() {
+    function printPDF() {
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+    const doc = new jsPDF("p", "mm", "a4");
 
-    // 1️⃣ ส่วนหัว
-    doc.setFontSize(18);
-    doc.text('แบบสำรวจสิ่งแวดล้อม', 105, 20, { align: 'center' });
+    // 1️⃣ เก็บค่าจากฟอร์ม
+    const ครั้งที่สำรวจ = document.getElementById("ครั้งที่สำรวจ").value;
+    const วันที่ทำการสำรวจ = document.getElementById("date-display").value;
+    const สถานที่ = document.getElementById("สถานที่").value;
+    const ข้อเสนอแนะ = document.getElementById("ข้อเสนอแนะ").value;
+    const ชื่อผู้สำรวจ = document.getElementById("ชื่อผู้สำรวจ").value;
+    const ตำแหน่งผู้สำรวจ = document.getElementById("ตำแหน่ง").value;
+    const ตำแหน่งเจ้าของสถานที่ = document.getElementById("ตำแหน่งเจ้าของสถานที่").value;
 
-    doc.setFontSize(12);
-    doc.text('วล.02 (แก้ไขครั้งที่ 03)', 190, 10, { align: 'right' });
+    // 2️⃣ ใส่ข้อความทั่วไป
+    doc.setFont("THSarabunNew", "normal");
+    doc.setFontSize(20);
+    doc.text("แบบสำรวจสิ่งแวดล้อม (วล.02)", 105, 20, { align: "center" });
 
-    // 2️⃣ ข้อมูลทั่วไป
-    doc.setFontSize(12);
-    const date = document.getElementById("date-display").value;
-    const round = document.getElementById("ครั้งที่สำรวจ").value;
-    const location = document.getElementById("สถานที่").value;
-    const surveyor = document.getElementById("ชื่อผู้สำรวจ").value;
-    const position = document.getElementById("ตำแหน่ง").value;
-    const suggestion = document.getElementById("ข้อเสนอแนะ").value;
+    doc.setFontSize(16);
+    doc.text(`ครั้งที่สำรวจ: ${ครั้งที่สำรวจ}`, 15, 35);
+    doc.text(`วันที่ทำการสำรวจ: ${วันที่ทำการสำรวจ}`, 15, 45);
+    doc.text(`สถานที่: ${สถานที่}`, 15, 55);
 
-    doc.text(`ครั้งที่สำรวจ : ${round}`, 15, 30);
-    doc.text(`วันที่ทำการสำรวจ : ${date}`, 105, 30);
-    doc.text(`สถานที่ : ${location}`, 15, 40);
+    // 3️⃣ Table ผลการสำรวจ (เฉพาะตัวอย่างส่วนนี้ → สามารถต่อเติม)
+    const tableData = [];
 
-    // 3️⃣ สร้างตาราง autoTable
-    const tableBody = [];
+    // loop input type="radio" + text
+    const questions = document.querySelectorAll("table tr");
+    questions.forEach(row => {
+        const tds = row.querySelectorAll("td");
+        if (tds.length >= 5) {
+            const questionText = tds[0].innerText.trim();
 
-    // เก็บข้อมูลจาก form → ใส่ใน array
-    const items = [
-        ["1. ความสะอาด", [
-            "1.1 อาคารและบริเวณโดยรอบสะอาด",
-            "1.2 อุปกรณ์ของใช้สะอาดและอยู่ในสภาพดี",
-            "1.3 มีการจัดวางสิ่งของเป็นระเบียบเรียบร้อย"
-        ]],
-        ["2. ขยะ", [
-            "2.1 ที่รองรับขยะถูกหลักสุขาภิบาล",
-            "2.2 ที่รองรับขยะมีจำนวนเพียงพอ",
-            "2.3 มีการคัดแยกประเภทขยะ",
-            "2.4 มีการคัดแยกประเภทขยะ",
-            "2.5 ขยะไม่ส่งกลิ่นเหม็นรบกวน"
-        ]],
-        ["3. น้ำเสีย", [
-            "3.1 ท่อ/ รางระบายน้ำอยู่ในสภาพดี ไม่อุดตัน",
-            "3.2 มีการบำบัดน้ำเสียขั้นต้น เช่น ระบบบำบัดน้ำเสีย ถังดักไขมัน",
-            "3.3 ระบบบำบัดน้ำเสียใช้งานได้ปกติ"
-        ]]
-    ];
+            const radioName = tds[1].querySelector("input[type='radio']")?.name;
+            let selectedRadio = "";
+            if (radioName) {
+                const selected = document.querySelector(`input[name="${radioName}"]:checked`);
+                selectedRadio = selected ? selected.value : "";
+            }
 
-    items.forEach(([section, questions]) => {
-        questions.forEach((q, index) => {
-            const pass = document.querySelector(`input[name="${q}"][value="ผ่าน"]`)?.checked ? '✔' : '';
-            const fail = document.querySelector(`input[name="${q}"][value="ไม่ผ่าน"]`)?.checked ? '✔' : '';
-            const found = document.querySelector(`input[name="${q} สิ่งที่พบ"]`)?.value || '';
-            const fix = document.querySelector(`input[name="${q} แนวทางแก้ไข"]`)?.value || '';
+            const สิ่งที่พบ = tds[3].querySelector("input")?.value || "";
+            const แนวทางแก้ไข = tds[4].querySelector("input")?.value || "";
 
-            tableBody.push([
-                index === 0 ? section : '',  // section ใส่เฉพาะแถวแรก
-                q,
-                pass,
-                fail,
-                found,
-                fix
-            ]);
-        });
-    });
-
-    doc.autoTable({
-        startY: 50,
-        head: [[
-            'เรื่อง',
-            'รายละเอียดการสำรวจ',
-            'ผ่าน',
-            'ไม่ผ่าน',
-            'สิ่งที่พบ',
-            'แนวทางการดำเนินการแก้ไข'
-        ]],
-        body: tableBody,
-        styles: {
-            fontSize: 12,
-            cellPadding: 4
-        },
-        headStyles: {
-            fillColor: [230, 230, 230]
-        },
-        columnStyles: {
-            1: { halign: 'left' },
-            4: { halign: 'left' },
-            5: { halign: 'left' }
+            tableData.push([questionText, selectedRadio, สิ่งที่พบ, แนวทางแก้ไข]);
         }
     });
 
+    doc.autoTable({
+        startY: 65,
+        head: [["หัวข้อ", "ผลการสำรวจ", "สิ่งที่พบ", "แนวทางการแก้ไข"]],
+        body: tableData,
+        styles: { font: "THSarabunNew", fontSize: 14 },
+        headStyles: { fillColor: [200, 200, 200] }
+    });
+
     // 4️⃣ ข้อเสนอแนะ
-    let lastY = doc.lastAutoTable.finalY + 10;
-    doc.text(`ข้อเสนอแนะ : ${suggestion}`, 15, lastY);
+    let afterTableY = doc.lastAutoTable.finalY + 10;
+    doc.text(`ข้อเสนอแนะ: ${ข้อเสนอแนะ}`, 15, afterTableY);
 
     // 5️⃣ ชื่อผู้สำรวจ
-    lastY += 20;
-    doc.text(`ชื่อผู้สำรวจ : ${surveyor}`, 15, lastY);
-    doc.text(`ตำแหน่ง : ${position}`, 15, lastY + 10);
+    afterTableY += 10;
+    doc.text(`ชื่อผู้สำรวจ: ${ชื่อผู้สำรวจ}`, 15, afterTableY);
+    doc.text(`ตำแหน่ง: ${ตำแหน่งผู้สำรวจ}`, 15, afterTableY + 10);
 
-    // 6️⃣ ลายเซ็นเจ้าของสถานที่
-    const canvasSignature = document.getElementById('signature-pad');
-    const signatureImage = canvasSignature.toDataURL('image/png');
+    // 6️⃣ เจ้าของสถานที่
+    doc.text(`เจ้าของสถานที่รับทราบ`, 140, afterTableY);
+    doc.text(`ตำแหน่ง: ${ตำแหน่งเจ้าของสถานที่}`, 140, afterTableY + 10);
 
-    doc.text('เจ้าของสถานที่รับทราบ :', 105, lastY);
-    doc.addImage(signatureImage, 'PNG', 105, lastY + 5, 60, 30); // ขนาดลายเซ็น
+    // 7️⃣ ใส่ลายเซ็น (canvas → image)
+    const canvas = document.getElementById("signature-pad");
+    const signatureImage = canvas.toDataURL("image/png");
+    doc.addImage(signatureImage, "PNG", 140, afterTableY + 20, 50, 25);
 
-    const ownerPosition = document.getElementById("ตำแหน่งเจ้าของสถานที่").value;
-    doc.text(`ตำแหน่ง : ${ownerPosition}`, 105, lastY + 40);
-
-    // Save PDF
-    doc.save('แบบสำรวจสิ่งแวดล้อม.pdf');
+    // 8️⃣ Save PDF
+    doc.save(`แบบสำรวจสิ่งแวดล้อม.pdf`);
 }
+    
+
+    
   </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -456,10 +404,9 @@ dateHidden.addEventListener('change', () => {
     const formattedDate = formatThaiDate(dateHidden.value);
     dateDisplay.value = formattedDate;
 });
-</script>
+
 
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 
 </html>
