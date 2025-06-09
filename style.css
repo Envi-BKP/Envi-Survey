@@ -84,9 +84,7 @@ span{
         font-size: 18px;
     }
 
-    .button, .btn-group, input[type="button"], button {
-        display: none !important;
-    }
+    
 
     .wrapper {
         padding: 20px; /* ลดจาก 30px เหลือ 5px */
@@ -162,4 +160,3 @@ canvas {
 input{
     padding-left: 20px;
 }
-
