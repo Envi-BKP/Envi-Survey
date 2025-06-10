@@ -2,6 +2,79 @@
     size: A4;
     margin: 10mm;
 }
+@media print {
+    .btn-group, .box_button, button {
+          display: none !important;
+    }
+    body, html {
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        background: white;
+    }
+
+    .container {
+        width: 210mm;
+        height: 297mm;
+        margin: 0 auto;
+        padding: 5mm;
+        box-shadow: none;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px; /* ลด font ให้พอดีหน้า A4 */
+        page-break-inside: avoid;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    th, td {
+        padding: 2px 4px; /* ลด padding */
+        text-align: left;
+        vertical-align: top;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .head-table th {
+        text-align: center;
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    span {
+        font-size: 16px;
+    }
+
+    .wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .underline-input {
+        font-size: 14px;
+        width: 100%; /* ให้ขยายเต็ม cell */
+    }
+
+    .signature-pad {
+        max-width: 200px;
+        height: 60px;
+    }
+
+    canvas {
+        border: none;
+    }
+
+}
   
 body {
     font-family: "TH Sarabun New", sans-serif;
@@ -55,54 +128,7 @@ span{
     font-size: 20px;
 }
    
-@media print {
-    body, html {
-        margin: 0;
-        padding: 0;
-        box-shadow: none;
-        background: white;
-    }
 
-    .container {
-        box-shadow: none;
-        margin: 0;
-        padding: 0; /* ลดจาก 0 เป็น 5mm ให้ยังมีขอบ */
-        width: 100%;
-    }
-
-    table, th, td {
-        border: 1px solid black;
-        font-size: 1ุ6px; /* ลด font table */
-        padding: 3px; /* ลด padding cell */
-    }
-
-    h1 {
-        font-size: 28px;
-    }
-
-    span {
-        font-size: 18px;
-    }
-
-    
-
-    .wrapper {
-        padding: 20px; /* ลดจาก 30px เหลือ 5px */
-    }
-
-    .underline-input {
-        font-size: 16px;
-    }
-
-    .signature-pad {
-        max-width: 250px;
-        height: 80px;
-    
-    }
-    canvas {
-        border: none;
-    }
-}
 
   
 .signature-pad {
@@ -122,16 +148,7 @@ button {
         margin-right: 10px;
 }
   
-      /* ซ่อนปุ่มตอนพิมพ์ */
-      @media print {
-        .btn-group, button {
-          display: none;
-        }
   
-canvas {
-          border: none;
-        }
-}
 .inline-group {
       display: flex;
       flex-wrap: wrap;
