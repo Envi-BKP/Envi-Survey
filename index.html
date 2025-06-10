@@ -297,82 +297,7 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    function printPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF("p", "mm", "a4");
-
-    // 1️⃣ เก็บค่าจากฟอร์ม
-    const ครั้งที่สำรวจ = document.getElementById("ครั้งที่สำรวจ").value;
-    const วันที่ทำการสำรวจ = document.getElementById("date-display").value;
-    const สถานที่ = document.getElementById("สถานที่").value;
-    const ข้อเสนอแนะ = document.getElementById("ข้อเสนอแนะ").value;
-    const ชื่อผู้สำรวจ = document.getElementById("ชื่อผู้สำรวจ").value;
-    const ตำแหน่งผู้สำรวจ = document.getElementById("ตำแหน่ง").value;
-    const ตำแหน่งเจ้าของสถานที่ = document.getElementById("ตำแหน่งเจ้าของสถานที่").value;
-
-    // 2️⃣ ใส่ข้อความทั่วไป
-    doc.setFont("THSarabunNew", "normal");
-    doc.setFontSize(20);
-    doc.text("แบบสำรวจสิ่งแวดล้อม (วล.02)", 105, 20, { align: "center" });
-
-    doc.setFontSize(16);
-    doc.text(`ครั้งที่สำรวจ: ${ครั้งที่สำรวจ}`, 15, 35);
-    doc.text(`วันที่ทำการสำรวจ: ${วันที่ทำการสำรวจ}`, 15, 45);
-    doc.text(`สถานที่: ${สถานที่}`, 15, 55);
-
-    // 3️⃣ Table ผลการสำรวจ (เฉพาะตัวอย่างส่วนนี้ → สามารถต่อเติม)
-    const tableData = [];
-
-    // loop input type="radio" + text
-    const questions = document.querySelectorAll("table tr");
-    questions.forEach(row => {
-        const tds = row.querySelectorAll("td");
-        if (tds.length >= 5) {
-            const questionText = tds[0].innerText.trim();
-
-            const radioName = tds[1].querySelector("input[type='radio']")?.name;
-            let selectedRadio = "";
-            if (radioName) {
-                const selected = document.querySelector(`input[name="${radioName}"]:checked`);
-                selectedRadio = selected ? selected.value : "";
-            }
-
-            const สิ่งที่พบ = tds[3].querySelector("input")?.value || "";
-            const แนวทางแก้ไข = tds[4].querySelector("input")?.value || "";
-
-            tableData.push([questionText, selectedRadio, สิ่งที่พบ, แนวทางแก้ไข]);
-        }
-    });
-
-    doc.autoTable({
-        startY: 65,
-        head: [["หัวข้อ", "ผลการสำรวจ", "สิ่งที่พบ", "แนวทางการแก้ไข"]],
-        body: tableData,
-        styles: { font: "THSarabunNew", fontSize: 14 },
-        headStyles: { fillColor: [200, 200, 200] }
-    });
-
-    // 4️⃣ ข้อเสนอแนะ
-    let afterTableY = doc.lastAutoTable.finalY + 10;
-    doc.text(`ข้อเสนอแนะ: ${ข้อเสนอแนะ}`, 15, afterTableY);
-
-    // 5️⃣ ชื่อผู้สำรวจ
-    afterTableY += 10;
-    doc.text(`ชื่อผู้สำรวจ: ${ชื่อผู้สำรวจ}`, 15, afterTableY);
-    doc.text(`ตำแหน่ง: ${ตำแหน่งผู้สำรวจ}`, 15, afterTableY + 10);
-
-    // 6️⃣ เจ้าของสถานที่
-    doc.text(`เจ้าของสถานที่รับทราบ`, 140, afterTableY);
-    doc.text(`ตำแหน่ง: ${ตำแหน่งเจ้าของสถานที่}`, 140, afterTableY + 10);
-
-    // 7️⃣ ใส่ลายเซ็น (canvas → image)
-    const canvas = document.getElementById("signature-pad");
-    const signatureImage = canvas.toDataURL("image/png");
-    doc.addImage(signatureImage, "PNG", 140, afterTableY + 20, 50, 25);
-
-    // 8️⃣ Save PDF
-    doc.save(`แบบสำรวจสิ่งแวดล้อม.pdf`);
-}
+    
     
 
     
@@ -407,6 +332,7 @@ dateHidden.addEventListener('change', () => {
 
 
 </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 
 </html>
