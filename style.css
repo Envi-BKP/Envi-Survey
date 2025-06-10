@@ -124,7 +124,7 @@ button {
   
       /* ซ่อนปุ่มตอนพิมพ์ */
       @media print {
-        .btn-group, input, button {
+        .btn-group, button {
           display: none;
         }
   
