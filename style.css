@@ -85,6 +85,12 @@
 
 }
 @media screen and (max-width: 1024px) {
+     .left-box {
+        flex: 1 1 55%; /* กว้างขึ้นนิดนึง */
+    }
+    .right-box {
+        flex: 1 1 40%; /* แคบลงนิดนึง */
+    }
     .container {
         width: 95%;
         min-height: auto;
@@ -274,10 +280,15 @@ button {
   
 .wrapper {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
-    padding: 15px;
+    justify-content: space-between; /* หรือ flex-start ถ้าอยากชิดซ้าย */
+    align-items: flex-start;
+    flex-wrap: wrap; /* ถ้าใน tablet หรือ mobile อยากให้มันลงบรรทัดใหม่ */
+    width: 100%;
+    gap: 10px; /* ช่องว่างระหว่างกล่อง */
+}
+.left-box, .right-box {
+    flex: 1 1 48%; /* Default PC = 2 คอลัมน์ */
+    box-sizing: border-box;
 }
 .underline-input {
     border: none;
