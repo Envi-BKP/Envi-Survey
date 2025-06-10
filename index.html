@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=210mm, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'/>
     <link rel="stylesheet" href="style.css">
     <title>แบบสำรวจสิ่งแวดล้อม (วล.02)</title>
@@ -14,7 +15,7 @@
         
         <div class="container">
             <div style="text-align: right;" >วล.02 (แก้ไขครั้งที่ 03)</div><br>
-            <div class="main_title"><center><h1><b>แบบสำรวจสิ่งแวดล้อม</b></h1></center></div>
+            <div class="main_title"><h1><b>แบบสำรวจสิ่งแวดล้อม</b></h1></div>
 
             <div class="inline-group">
                 <div class="sub_title">
@@ -230,7 +231,7 @@
                         <option value="พนักงานการสินค้า 5">
                     </datalist>
                 <div class="btn-group">
-                    <button type="button" onclick="clearSignature()">ล้างลายเซ็น</button>
+                    <button class="bt" type="button" onclick="clearSignature()">ล้างลายเซ็น</button>
                     
                 </div>
                 
@@ -238,9 +239,9 @@
             
             </div>
             <div class="box_button">
-                <button type="button" onclick="printPDF()">Print PDF</button>
-                <button type="button" onclick="resetForm() ,clearSignature()">ล้างฟอร์ม</button>
-                <button type="submit">ส่งข้อมูล</button>
+                <button class="bt" type="button" onclick="printWithCustomFilename()">Print PDF</button>
+                <button class="bt" type="button" onclick="resetForm() ,clearSignature()">ล้างฟอร์ม</button>
+                <button class="bt" type="submit">ส่งข้อมูล</button>
             </div>
            
          
@@ -300,9 +301,23 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    function printPDF() {
-        window.print(); // ใช้ native print
-    }
+    function printWithCustomFilename() {
+    // ดึงค่าจาก input
+    var location = document.getElementById('สถานที่').value;
+    var surveyRound = document.getElementById('ครั้งที่สำรวจ').value;
+
+    // ตั้งชื่อ Title ใหม่ → browser จะใช้เป็นชื่อไฟล์ PDF
+    var originalTitle = document.title;
+    document.title = 'แบบสำรวจ_' + location + '_' + surveyRound;
+
+    // หน่วงเวลาเล็กน้อยให้ browser เปลี่ยน title ทัน
+    setTimeout(function() {
+        window.print();
+
+        // เปลี่ยน title กลับเป็นของเดิม (ไม่งั้น tab จะค้าง)
+        document.title = originalTitle;
+    }, 500);
+}
     
     
     
