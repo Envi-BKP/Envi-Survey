@@ -181,10 +181,12 @@
 
             <br>
         
+            
            
-            <div>
+            <div class="suggest">
                 <label for="ข้อเสนอแนะ"><b>ข้อเสนอแนะ :</b></label>
-                <input class="underline-input" style="width: 100%; box-sizing: border-box;" type="text" id="ข้อเสนอแนะ" name="ข้อเสนอแนะ">
+                <input class="underline-suggest" type="text" name="ข้อเสนอแนะ" id="ข้อเสนอแนะ">   
+                
             </div>
 
            
@@ -237,6 +239,7 @@
             </div>
             <div class="box_button">
                 <button type="button" onclick="printPDF()">Print PDF</button>
+                <button type="button" onclick="resetForm()">ล้างฟอร์ม</button>
                 <button type="submit">ส่งข้อมูล</button>
             </div>
            
@@ -333,6 +336,21 @@ dateHidden.addEventListener('change', () => {
     dateDisplay.value = formattedDate;
 });
 
+function resetForm() {
+    // เคลียร์ input type text (รวม input ที่ใช้ datalist ด้วย)
+    document.querySelectorAll('input[type="text"], input[list]').forEach(input => input.value = '');
+
+    // เคลียร์ radio button
+    document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+
+    // เคลียร์ textarea
+    document.querySelectorAll('textarea').forEach(textarea => textarea.value = '');
+
+    // เคลียร์ select (ถ้ามี dropdown)
+    document.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
+
+    alert("ล้างฟอร์มเรียบร้อยแล้ว");
+}
 
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
