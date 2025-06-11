@@ -31,7 +31,7 @@
 
                 <div class="sub_title" >
                     <span for="date"><b>วันที่ทำการสำรวจ :</b></span>
-                    <input class="underline-input" type="text" id="date-display" placeholder="คลิ๊กเลือกวันที่" readonly>
+                    <input class="underline-input" type="date" id="date-hidden" style="position:absolute; visibility:hidden; width:0; height:0;">
                     <input type="date" id="date-hidden" style="display:none;">
                 </div>
 
@@ -339,17 +339,23 @@
     return `${day} ${month} ${year}`;
 }
 
+
+
 const dateDisplay = document.getElementById('date-display');
 const dateHidden = document.getElementById('date-hidden');
 
+// คลิกที่ช่องแสดงผล -> เปิด date picker ที่ซ่อนอยู่
 dateDisplay.addEventListener('click', () => {
-    dateHidden.showPicker(); // เรียก date picker (เฉพาะ browser ที่รองรับ)
+    dateHidden.focus(); // บางอุปกรณ์ใช้ dateHidden.click(); ก็ได้
+    dateHidden.showPicker?.(); // สำหรับเบราว์เซอร์ที่รองรับ (Chrome)
 });
 
+// เมื่อเลือกวันที่ -> แสดงผลในรูปแบบไทย
 dateHidden.addEventListener('change', () => {
-    const formattedDate = formatThaiDate(dateHidden.value);
-    dateDisplay.value = formattedDate;
+    const thaiDate = formatThaiDate(dateHidden.value);
+    dateDisplay.value = thaiDate;
 });
+
 
 function resetForm() {
     // เคลียร์ input type text (รวม input ที่ใช้ datalist ด้วย)
