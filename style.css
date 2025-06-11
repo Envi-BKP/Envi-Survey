@@ -2,10 +2,11 @@
     size: A4;
     margin: 5mm;
     max-width: 768px
+    
 }
 body {
     font-family: "TH Sarabun New", sans-serif;
-    
+    padding: 20px;
     margin: 0;
     padding: 0;
     background: white;
