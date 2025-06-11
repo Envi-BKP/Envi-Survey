@@ -1,6 +1,6 @@
 @page {
     size: A4;
-    margin: 10mm;
+    margin: 5mm;
     max-width: 768px
 }
 body {
@@ -92,7 +92,7 @@ span, label{
 .suggest{
     width: 100%;
     box-sizing: border-box;
-    margin-bottom: 10px; /* เว้นระยะด้านล่าง */
+    margin-bottom: 5px; /* เว้นระยะด้านล่าง */
     padding: 0; /* ไม่มี padding */
 }
 .wrapper {
