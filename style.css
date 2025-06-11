@@ -93,11 +93,11 @@ span, label{
 .suggest{
     width: 100%;
     box-sizing: border-box;
-    margin-bottom: 5px; /* เว้นระยะด้านล่าง */
+    margin-bottom: 2px; /* เว้นระยะด้านล่าง */
     padding: 0; /* ไม่มี padding */
 }
 .wrapper {
-    margin-top: 50px;
+    margin-top: 15px;
     display: flex;
     justify-content: space-between; /* หรือ flex-start ถ้าอยากชิดซ้าย */
     align-items: flex-start;
