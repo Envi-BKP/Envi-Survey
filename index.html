@@ -256,6 +256,7 @@
     </form>
 </body>
 <script>
+    // 1. Map ชื่อ → ตำแหน่ง
     const namePositionMap = {
         "เตวิช ธงศิลา": "นักวิชาการ 6",
         "ปฏิมา ใช้ช่ำชอง": "นักวิชาการ 6",
@@ -269,112 +270,111 @@
     document.getElementById("ชื่อผู้สำรวจ").addEventListener("input", function () {
         const selectedName = this.value;
         const positionInput = document.getElementById("ตำแหน่ง");
-
-        if (namePositionMap[selectedName]) {
-            positionInput.value = namePositionMap[selectedName];
-        } else {
-            positionInput.value = ""; // Clear if no match
-        }
+        positionInput.value = namePositionMap[selectedName] || "";
     });
 
+    // 2. Signature Pad รองรับ mouse + touch
     const canvas = document.getElementById('signature-pad');
     const ctx = canvas.getContext('2d');
     let drawing = false;
 
+    // Mouse events
     canvas.addEventListener('mousedown', e => {
-      drawing = true;
-      ctx.beginPath();
-      ctx.moveTo(e.offsetX, e.offsetY);
+        drawing = true;
+        ctx.beginPath();
+        ctx.moveTo(e.offsetX, e.offsetY);
     });
 
     canvas.addEventListener('mousemove', e => {
-      if (drawing) {
-        ctx.lineTo(e.offsetX, e.offsetY);
-        ctx.stroke();
-      }
+        if (drawing) {
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+        }
     });
 
     canvas.addEventListener('mouseup', () => drawing = false);
     canvas.addEventListener('mouseleave', () => drawing = false);
 
+    // Touch events
+    canvas.addEventListener('touchstart', e => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        ctx.beginPath();
+        ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+        drawing = true;
+    });
+
+    canvas.addEventListener('touchmove', e => {
+        e.preventDefault();
+        if (drawing) {
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+            ctx.stroke();
+        }
+    });
+
+    canvas.addEventListener('touchend', () => drawing = false);
+    canvas.addEventListener('touchcancel', () => drawing = false);
+
     function clearSignature() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
+    // 3. Print with custom filename
     function printWithCustomFilename() {
-    // ดึงค่าจาก input
-    var location = document.getElementById('สถานที่').value;
-    var surveyRound = document.getElementById('ครั้งที่สำรวจ').value;
+        const location = document.getElementById('สถานที่').value;
+        const surveyRound = document.getElementById('ครั้งที่สำรวจ').value;
 
-    // ตั้งชื่อ Title ใหม่ → browser จะใช้เป็นชื่อไฟล์ PDF
-    var originalTitle = document.title;
-    document.title = 'แบบสำรวจ_' + location + '_' + surveyRound;
+        const originalTitle = document.title;
+        document.title = 'แบบสำรวจ_' + location + '_' + surveyRound;
 
-    // หน่วงเวลาเล็กน้อยให้ browser เปลี่ยน title ทัน
-    setTimeout(function() {
-        window.print();
+        setTimeout(() => {
+            window.print();
+            document.title = originalTitle;
+        }, 500);
+    }
 
-        // เปลี่ยน title กลับเป็นของเดิม (ไม่งั้น tab จะค้าง)
-        document.title = originalTitle;
-    }, 500);
-}
-    
-    
-    
+    // 4. Thai date formatting
+    function formatThaiDate(dateStr) {
+        const months = [
+            "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+            "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+        ];
+        const dateObj = new Date(dateStr);
+        const day = dateObj.getDate();
+        const month = months[dateObj.getMonth()];
+        const year = dateObj.getFullYear() + 543;
+        return `${day} ${month} ${year}`;
+    }
 
-    
-  </script>
+    const dateDisplay = document.getElementById('date-display');
+    const dateHidden = document.getElementById('date-hidden');
+
+    dateDisplay.addEventListener('click', () => {
+        dateHidden.focus();
+        dateHidden.showPicker?.();
+    });
+
+    dateHidden.addEventListener('change', () => {
+        dateDisplay.value = formatThaiDate(dateHidden.value);
+    });
+
+    // 5. Reset form
+    function resetForm() {
+        document.querySelectorAll('input[type="text"], input[list]').forEach(input => input.value = '');
+        document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+        document.querySelectorAll('textarea').forEach(textarea => textarea.value = '');
+        document.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
+        alert("ล้างฟอร์มเรียบร้อยแล้ว");
+    }
+</script>
+
+<!-- External script libraries -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script>
-    function formatThaiDate(dateStr) {
-    const months = [
-        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
-        "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
-    ];
-    const dateObj = new Date(dateStr);
-    const day = dateObj.getDate();
-    const month = months[dateObj.getMonth()];
-    const year = dateObj.getFullYear() + 543; // แปลงเป็น พ.ศ.
-    return `${day} ${month} ${year}`;
-}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd
 
-
-
-const dateDisplay = document.getElementById('date-display');
-const dateHidden = document.getElementById('date-hidden');
-
-// คลิกที่ช่องแสดงผล -> เปิด date picker ที่ซ่อนอยู่
-dateDisplay.addEventListener('click', () => {
-    dateHidden.focus(); // บางอุปกรณ์ใช้ dateHidden.click(); ก็ได้
-    dateHidden.showPicker?.(); // สำหรับเบราว์เซอร์ที่รองรับ (Chrome)
-});
-
-// เมื่อเลือกวันที่ -> แสดงผลในรูปแบบไทย
-dateHidden.addEventListener('change', () => {
-    const thaiDate = formatThaiDate(dateHidden.value);
-    dateDisplay.value = thaiDate;
-});
-
-
-function resetForm() {
-    // เคลียร์ input type text (รวม input ที่ใช้ datalist ด้วย)
-    document.querySelectorAll('input[type="text"], input[list]').forEach(input => input.value = '');
-
-    // เคลียร์ radio button
-    document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
-
-    // เคลียร์ textarea
-    document.querySelectorAll('textarea').forEach(textarea => textarea.value = '');
-
-    // เคลียร์ select (ถ้ามี dropdown)
-    document.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
-
-    alert("ล้างฟอร์มเรียบร้อยแล้ว");
-}
-
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 
 </html>
