@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=210mm, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/th.js"></script>
     <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'/>
     <link rel="stylesheet" href="style.css">
     <title>แบบสำรวจสิ่งแวดล้อม (วล.02)</title>
@@ -30,9 +33,8 @@
                 </div>
 
                 <div class="sub_title" >
-                    <span for="date"><b>วันที่ทำการสำรวจ :</b></span>
-                    <input class="underline-input" type="date" id="date-hidden" style="position:absolute; visibility:hidden; width:0; height:0;">
-                    <input type="date" id="date-hidden" style="display:none;">
+                    <label for="thaiDate"><b>วันที่ทำการสำรวจ :</b></label>
+                    <input id="thaiDate" class="underline-input" type="text" placeholder="เลือกวันที่">
                 </div>
 
                 <div class="sub_title">
@@ -73,7 +75,7 @@
                     </datalist>
                 </div>   
             </div>
-            
+         
         
             <table>
 
@@ -193,47 +195,55 @@
            
         
             <div class="wrapper">
-            <div class="left-box">
-                <span for="ชื่อผู้สำรวจ"><b>ชื่อผู้สำรวจ :</b></span>
-                <input class="underline-input" list="รายชื่อ" placeholder="เลือกชื่อผู้สำรวจ" required autocomplete="off" id="ชื่อผู้สำรวจ" name="ชื่อผู้สำรวจ">
+                <!-- กล่องซ้าย -->
+                <div class="left-box">
+                    <label for="ชื่อผู้สำรวจ"><b>ชื่อผู้สำรวจ :</b></label>
+                    <input class="underline-inputw" list="รายชื่อ" placeholder="เลือกชื่อผู้สำรวจ" required autocomplete="off" id="ชื่อผู้สำรวจ" name="ชื่อผู้สำรวจ">
                     <datalist id="รายชื่อ">
-                        <option value="พนิตพิชา วัยคุณา">
-                        <option value="ณัทฐา ภักดีประเสริฐ">
-                        <option value="อิงกมล แสงสินชัย">    
-                        <option value="ณพล สารศาสตร์บัญชา">
-                        <option value="ธนกร อินทรีเนตร">
-                        <option value="ปฏิมา ใช้ช่ำชอง">
-                        <option value="เตวิช ธงศิลา">
+                    <option value="พนิตพิชา วัยคุณา">
+                    <option value="ณัทฐา ภักดีประเสริฐ">
+                    <option value="อิงกมล แสงสินชัย">
+                    <option value="ณพล สารศาสตร์บัญชา">
+                    <option value="ธนกร อินทรีเนตร">
+                    <option value="ปฏิมา ใช้ช่ำชอง">
+                    <option value="เตวิช ธงศิลา">
+                    </datalist>
 
-                    </datalist>
-                <br>
-                <span for="ตำแหน่ง"><b>ตำแหน่ง :</b></span>
-                <input class="underline-input" list="Position" placeholder="ระบุตำแหน่ง" required autocomplete="off" id="ตำแหน่ง" name="ตำแหน่ง">
+                    <br><br>
+
+                    <label for="ตำแหน่ง"><b>ตำแหน่ง :</b></label>
+                    <input class="underline-inputw" list="Position" placeholder="ระบุตำแหน่ง" required autocomplete="off" id="ตำแหน่ง" name="ตำแหน่ง">
                     <datalist id="Position">
-                        <option value="หัวหน้าแผนก">
-                        <option value="ผู้ช่วยหัวหน้าแผนก">
-                        <option value="หม.ประเมินผลฯ">
-                        <option value="หม.วางแผนงานฯ">
-                        <option value="นักวิชาการ 6">
+                    <option value="หัวหน้าแผนก">
+                    <option value="ผู้ช่วยหัวหน้าแผนก">
+                    <option value="หม.ประเมินผลฯ">
+                    <option value="หม.วางแผนงานฯ">
+                    <option value="นักวิชาการ 6">
                     </datalist>
-            </div>
-            <div class="right-box">
-                <label><b>เจ้าของสถานที่รับทราบ :</b></label>
-                <canvas id="signature-pad" class="signature-pad"></canvas><br>
-                <span for="ตำแหน่งเจ้าของสถานที่"><b>ตำแหน่ง :</b></span>
-                <input class="underline-input" list="PositionArea" placeholder="ระบุตำแหน่ง" required autocomplete="off" id="ตำแหน่งเจ้าของสถานที่" name="ตำแหน่งเจ้าของสถานที่">
-                    <datalist id="PositionArea">
-                        <option value="หัวหน้าแผนก">
-                        <option value="ผู้ช่วยหัวหน้าแผนก">
-                        <option value="หัวหน้าหมวดฯ">
-                        <option value="พนักงานการสินค้า 8">
-                        <option value="พนักงานการสินค้า 6">
-                        <option value="พนักงานการสินค้า 5">
-                    </datalist>
-                <div class="btn-group">
-                    <button class="bt" type="button" onclick="clearSignature()">ล้างลายเซ็น</button>
-                    
                 </div>
+
+                <!-- กล่องขวา -->
+                <div class="right-box">
+                    <label><b>เจ้าของสถานที่รับทราบ :</b></label>
+                    <canvas id="signature-pad" class="signature-pad"></canvas>
+                    <div class="btn-group">
+                        <button class="bt" type="button" onclick="clearSignature()">ล้างลายเซ็น</button>
+                    </div>
+                    <br>
+                    <label for="ตำแหน่งเจ้าของสถานที่"><b>ตำแหน่ง :</b></label>
+                    <input class="underline-input" list="PositionArea" placeholder="ระบุตำแหน่ง" required autocomplete="off" id="ตำแหน่งเจ้าของสถานที่" name="ตำแหน่งเจ้าของสถานที่">
+                    <datalist id="PositionArea">
+                    <option value="หัวหน้าแผนก">
+                    <option value="ผู้ช่วยหัวหน้าแผนก">
+                    <option value="หัวหน้าหมวดฯ">
+                    <option value="พนักงานการสินค้า 8">
+                    <option value="พนักงานการสินค้า 6">
+                    <option value="พนักงานการสินค้า 5">
+                    </datalist>
+                </div>
+                </div>
+
+                
                 
             </div>
             
@@ -353,29 +363,26 @@ resizeCanvas(); // เรียกใช้ทันทีตอนโหลด�
     }
 
     // 4. Thai date formatting
-    function formatThaiDate(dateStr) {
-        const months = [
-            "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
-            "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+     flatpickr("#thaiDate", {
+    locale: "th", // ภาษาไทย
+    dateFormat: "j F Y", // เช่น 10 มกราคม 2568
+    disableMobile: true, // บังคับใช้ Flatpickr แม้บนมือถือ
+    onChange: function(selectedDates, dateStr, instance) {
+      // แปลง ค.ศ. เป็น พ.ศ.
+      const date = selectedDates[0];
+      if (date) {
+        const day = date.getDate();
+        const monthNames = [
+          "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+          "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
         ];
-        const dateObj = new Date(dateStr);
-        const day = dateObj.getDate();
-        const month = months[dateObj.getMonth()];
-        const year = dateObj.getFullYear() + 543;
-        return `${day} ${month} ${year}`;
+        const month = monthNames[date.getMonth()];
+        const year = date.getFullYear() + 543;
+
+        instance.input.value = `${day} ${month} ${year}`;
+      }
     }
-
-    const dateDisplay = document.getElementById('date-display');
-    const dateHidden = document.getElementById('date-hidden');
-
-    dateDisplay.addEventListener('click', () => {
-        dateHidden.focus();
-        dateHidden.showPicker?.();
-    });
-
-    dateHidden.addEventListener('change', () => {
-        dateDisplay.value = formatThaiDate(dateHidden.value);
-    });
+  });
 
     // 5. Reset form
     function resetForm() {

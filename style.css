@@ -1,151 +1,216 @@
+@font-face {
+  font-family: 'TH Sarabun New';
+  src: url('fonts/THSarabunNew.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @page {
-    size: A4;
-    margin: 5mm;
-    max-width: 768px;
+  size: A4;
+  margin: 5mm;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
-    font-family: "TH Sarabun New", sans-serif;
-    padding: 20px;
-    margin: 0;
-    padding: 0;
-    background: white;
+  font-family: 'TH Sarabun New', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: white;
 }
 
 .container {
-    width: 210mm;
-    height: 297mm;
-    margin: auto;
-    padding: 5mm;
-    box-sizing: border-box;
-    background: white;
-    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+ font-family: 'TH Sarabun New', sans-serif;
+  width: 210mm;
+  height: 297mm;
+  margin: auto;
+  padding: 5mm;
+  box-sizing: border-box;
+  background: white;
+  box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 5px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 5px;
 }
 
 table, tr, th, td {
-    border: 1px solid #000;  
-    font-size: 20px;
+  border: 1px solid #000;
 }
 
 input {
-    padding-left: 10px;
-    font-family: "TH Sarabun New", sans-serif;
-    font-size: 20px;
+   font-family: 'TH Sarabun New', sans-serif;
+  padding-left: 10px;
+  
 }
 
 .underline-suggest {
-    border: none;
-    border-bottom: 1px dotted #000;
-    outline: none;
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 20px;
-    line-height: 1.0em;
-    padding: 2px 0;
+  border: none;
+  border-bottom: 1px dotted #000;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 0.5em;
+  padding: 5px 5px;
+  margin-top: 5px;
+  
 }
 
 .inline-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
 }
 
 .underline-input {
-    border: none;
-    outline: none;
-    width: 180px;
+  border: none;
+  outline: none;
+  width: 180px;
 }
 
 h1 {
-    text-align: center;
-    box-sizing: border-box;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .head-table th {
-    text-align: center;
-    font-size: 20px;
+  text-align: center;
 }
 
 .in {
-    text-align: center;
+  text-align: center;
 }
 
-span, label {
-    font-size: 22px;
+
+
+
+
+.head-table th, .underline-suggest, table, tr, th, td, input {
+  font-size: 20px;
+}
+::placeholder,span, label{
+    font-size: 23px;
 }
 
-.signature-pad {
-    border: 1px solid #ccc;
-    width: 100%;
-    max-width: 300px;
-    height: 100px;
-}
 
-::placeholder {
-    padding-left: 18px;
-    font-size: 20px;
+::placeholder{
+    padding-left: 14px;
 }
 
 .suggest {
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 2px;
-    padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  padding: 20px 0;
 }
 
 .wrapper {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: nowrap; /* ห้าม wrap */
-    width: 100%;
-    gap: 10px;
-    overflow-x: auto; /* เผื่อกรณีจอแคบ */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 50px; /* ระยะห่างระหว่างกล่อง */
+  flex-wrap: wrap; /* รองรับจอเล็ก */
 }
 
+.left-box,
+.right-box {
+  flex: 1 1 40%;
+  box-sizing: border-box;
+}
+
+.signature-pad {
+  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 300px;
+  height: 100px;
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 2px;
+}
+
+.underline-inputw {
+  border: none;
+  border-bottom: 1px dotted #000;
+  outline: none;
+  width: 100%;
+  font-family: 'TH Sarabun New', sans-serif;
+  padding: 2px 5px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+
 @media print {
-    @page {
-        size: A4;
-        margin: 20px;
-    }
+  @page {
+    size: A4;
+    margin: 2mm 5mm 5mm 2mm; 
+  }
 
-    .btn-group, .box_button, button {
-        display: none !important;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+  }
 
-    .container {
-        box-shadow: none !important;
-    }
+  .container {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    
+  }
+
+  .btn-group, .box_button, button {
+    display: none !important;
+  }
 }
 
 @media (max-width: 768px) {
-    html, body {
-        width: 100%;
-        overflow-x: auto;
-    }
+  html, body {
+    width: 100%;
+  }
 
-    body {
-        transform: scale(0.8); /* ย่อขนาดลง */
-        transform-origin: top left;
-    }
+  body {
+    transform: scale(0.8);
+   
+  }
 
-    .container {
-        width: 210mm;
-        box-shadow: none;
-        overflow-x: auto;
-    }
+  .container {
+    width: 210mm;
+    box-shadow: none;
+  }
 
-    .wrapper {
-        flex-wrap: nowrap; /* ยังไม่ให้ wrap */
-    }
+  .wrapper {
+    flex-wrap: nowrap;
+  }
+}
+@media (max-width: 1024px) {
+  html, body {
+    width: 100%;
+    
+  }
+
+  body {
+    transform: scale(0.85); /* ปรับขนาดเล็กลง */
+    
+  }
+
+  .container {
+    width: 100vw;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    transform: scale(0.75); /* ย่อเล็กลงอีกสำหรับมือถือ */
+    
+  }
 }
