@@ -197,10 +197,10 @@ h1 {
   background: white;
   box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
 }
-  .head-table th, .underline-suggest, table, tr, th, td, input {
-  font-size: 20px;
+  .head-table th, .underline-suggest, table, tr, th, td, input, .underline-inputw {
+  font-size: 18px;
   }
 ::placeholder,span, label{
-    font-size: 20px;
+    font-size: 18px;
 }
   }
