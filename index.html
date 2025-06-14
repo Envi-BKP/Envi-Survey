@@ -278,6 +278,22 @@
     const ctx = canvas.getContext('2d');
     let drawing = false;
 
+    function resizeCanvas() {
+    const ratio = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+
+    canvas.width = rect.width * ratio;
+    canvas.height = rect.height * ratio;
+
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
+
+    ctx.setTransform(1, 0, 0, 1, 0, 0); // reset
+    ctx.scale(ratio, ratio);
+}
+
+resizeCanvas(); // เรียกใช้ทันทีตอนโหลดหน้า
+
     // Mouse events
     canvas.addEventListener('mousedown', e => {
         drawing = true;
