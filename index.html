@@ -16,13 +16,13 @@
         <div id="content">
         
         <div class="container">
-            <div style="text-align: right;" >วล.02 (แก้ไขครั้งที่ 03)</div><br>
+            <div style="text-align: right;" >วล.02 (แก้ไขครั้งที่ 03)</div>
             <div class="main_title"><h1><b>แบบสำรวจสิ่งแวดล้อม</b></h1></div>
 
             <div class="inline-group">
                 <div class="sub_title">
                     <span for="ครั้งที่สำรวจ"><b>ครั้งที่สำรวจ :</b></span>
-                    <input class="underline-input" placeholder="เลือกครั้งที่สำรวจ" list="ครั้งที่" required autocomplete="off" id="ครั้งที่สำรวจ" name="ครั้งที่สำรวจ">
+                    <input class="underline-inputF" placeholder="เลือกครั้งที่สำรวจ" list="ครั้งที่" required autocomplete="off" id="ครั้งที่สำรวจ" name="ครั้งที่สำรวจ">
                         <datalist id="ครั้งที่">
                         <option value="1/ 2568">
                         <option value="2/ 2568">
@@ -33,12 +33,12 @@
 
                 <div class="sub_title" >
                     <label for="thaiDate"><b>วันที่ทำการสำรวจ :</b></label>
-                    <input id="thaiDate" class="underline-input" type="text" placeholder="เลือกวันที่">
+                    <input id="thaiDate" class="underline-inputF" type="text" placeholder="เลือกวันที่">
                 </div>
 
                 <div class="sub_title">
                 <span for="สถานที่"><b>สถานที่ :</b></span>
-                <input class="underline-input"  placeholder="เลือกสถานที่" list="หน่วยงาน" required autocomplete="off" id="สถานที่" name="สถานที่">
+                <input class="underline-inputF"  placeholder="เลือกสถานที่" list="หน่วยงาน" required autocomplete="off" id="สถานที่" name="สถานที่">
                     <datalist id="หน่วยงาน">
                         <option value="โรงอาหาร ทกท.1">
                         <option value="โรงอาหาร ทกท.2">
@@ -181,7 +181,7 @@
                 
             </table>
 
-            <br>
+            
         
             
            
@@ -191,7 +191,7 @@
                 
             </div>
 
-           
+           <br> 
         
             <div class="wrapper">
                 <!-- กล่องซ้าย -->
@@ -225,12 +225,16 @@
                 <div class="right-box">
                     <label><b>เจ้าของสถานที่รับทราบ :</b></label>
                     <canvas id="signature-pad" class="signature-pad"></canvas>
+                    
                     <div class="btn-group">
                         <button class="bt" type="button" onclick="clearSignature()">ล้างลายเซ็น</button>
                     </div>
+
+                    <label for="ชื่อผู้ลงนามเจ้าของสถานที่"><b>ชื่อ :</b></label>
+                    <input class="underline-inputw" type="text" placeholder="ชื่อ - สกุล" id="ชื่อผู้ลงนามเจ้าของสถานที่" name="ชื่อผู้ลงนามเจ้าของสถานที่">
                     <br>
                     <label for="ตำแหน่งเจ้าของสถานที่"><b>ตำแหน่ง :</b></label>
-                    <input class="underline-input" list="PositionArea" placeholder="ระบุตำแหน่ง" required autocomplete="off" id="ตำแหน่งเจ้าของสถานที่" name="ตำแหน่งเจ้าของสถานที่">
+                    <input class="underline-inputw" list="PositionArea" placeholder="ระบุตำแหน่ง" required autocomplete="off" id="ตำแหน่งเจ้าของสถานที่" name="ตำแหน่งเจ้าของสถานที่">
                     <datalist id="PositionArea">
                     <option value="หัวหน้าแผนก">
                     <option value="ผู้ช่วยหัวหน้าแผนก">
@@ -270,7 +274,7 @@
         "ณพล สารศาสตร์บัญชา": "นักวิชาการ 6",
         "พนิตพิชา วัยคุณา": "หัวหน้าแผนก",
         "ณัทฐา ภักดีประเสริฐ": "ผู้ช่วยหัวหน้าแผนก",
-        "อิงกมล แสงสินชัย": "ผู้ช่วยหัวหน้าแผนก",
+        "อิงกมล แสงสินชัย": "หัวหน้าหมวดประเมินผลฯ",
     };
 
     document.getElementById("ชื่อผู้สำรวจ").addEventListener("input", function () {

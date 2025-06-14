@@ -34,6 +34,7 @@ body {
   box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
 }
 
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -56,9 +57,9 @@ input {
   outline: none;
   width: 100%;
   box-sizing: border-box;
-  line-height: 0.5em;
-  padding: 3px 3px;
-  margin-top: 3px;
+  line-height: 0.1em;
+  padding: 3px;
+  
   
 }
 
@@ -70,8 +71,17 @@ input {
   justify-content: space-between;
   margin-top: 2px;
 }
+.underline-inputF {
+  border: none;
+  border-bottom: 1px dotted #000;
+  outline: none;
+  text-align: center;
+  width: 180px;
+  
+}
 
 .underline-input {
+  
   border: none;
   outline: none;
   width: 180px;
@@ -82,13 +92,11 @@ h1 {
   box-sizing: border-box;
 }
 
-.head-table th {
+.head-table th, .in {
   text-align: center;
 }
 
-.in {
-  text-align: center;
-}
+
 
 
 
@@ -109,8 +117,8 @@ h1 {
 .suggest {
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: 5px;
-  padding: 10px 0;
+  margin-bottom: 2px;
+  padding: 5px 0;
 }
 
 .wrapper {
@@ -141,9 +149,9 @@ h1 {
   border: none;
   border-bottom: 1px dotted #000;
   outline: none;
-  width: 100%;
+  width: 70%;
   font-family: 'TH Sarabun New', sans-serif;
-  padding: 2px 5px;
+  padding: 1px ;
   box-sizing: border-box;
   text-align: center;
 }
@@ -154,12 +162,16 @@ h1 {
     size: A4;
     margin: 5mm 5mm 5mm 5mm; 
   }
+  
 
   body {
     margin: 0;
     padding: 5px;
   }
 
+ .signature-pad {
+    border: none !important;
+  }
   .container {
     margin: 0 !important;
     padding: 5px !important;
@@ -208,6 +220,7 @@ h1 {
   width: 210mm;
   max-height: 297mm;
   margin: auto;
+  margin-top: auto;
   padding: 5mm;
   box-sizing: border-box;
   background: white;
