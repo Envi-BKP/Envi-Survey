@@ -57,8 +57,8 @@ input {
   width: 100%;
   box-sizing: border-box;
   line-height: 0.5em;
-  padding: 5px 5px;
-  margin-top: 5px;
+  padding: 3px 3px;
+  margin-top: 3px;
   
 }
 
@@ -109,8 +109,8 @@ h1 {
 .suggest {
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: 10px;
-  padding: 20px 0;
+  margin-bottom: 5px;
+  padding: 10px 0;
 }
 
 .wrapper {
@@ -152,17 +152,17 @@ h1 {
 @media print {
   @page {
     size: A4;
-    margin: 2mm 5mm 5mm 2mm; 
+    margin: 5mm 5mm 5mm 5mm; 
   }
 
   body {
     margin: 0;
-    padding: 0;
+    padding: 5px;
   }
 
   .container {
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 5px !important;
     box-shadow: none !important;
     
   }
