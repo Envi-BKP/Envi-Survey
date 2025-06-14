@@ -184,9 +184,24 @@ h1 {
 
 
 @media (max-width: 768px) {
-  tml, body {
+  html, body {
     width: 100%;
-    
+    .container {
+  width: 210mm;
+  max-height: 297mm;
+  margin: auto;
+  padding: 5mm;
+  box-sizing: border-box;
+  background: white;
+  box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+}
+  .head-table th, .underline-suggest, table, tr, th, td, input, .underline-inputw {
+  font-size: 20px;
+  }
+::placeholder,span, label{
+    font-size: 20px;
+}
+  }
   }
   .container {
   width: 210mm;
