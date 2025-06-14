@@ -198,9 +198,9 @@ h1 {
   box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
 }
   .head-table th, .underline-suggest, table, tr, th, td, input {
-  font-size: 18px;
+  font-size: 20px;
   }
 ::placeholder,span, label{
-    font-size: 18px;
+    font-size: 20px;
 }
   }
