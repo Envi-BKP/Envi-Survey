@@ -178,15 +178,7 @@ h1 {
     width: 100%;
     
   }
-  }
-
-  
-
-
-@media (max-width: 768px) {
-  html, body {
-    width: 100%;
-    .container {
+  .container {
   width: 210mm;
   max-height: 297mm;
   margin: auto;
@@ -196,12 +188,21 @@ h1 {
   box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
 }
   .head-table th, .underline-suggest, table, tr, th, td, input, .underline-inputw {
-  font-size: 20px;
+  font-size: 19px;
   }
 ::placeholder,span, label{
-    font-size: 20px;
+    font-size: 19px;
 }
-  }
+  
+}
+
+  
+
+
+@media (max-width: 768px) {
+  html, body {
+    width: 100%;
+    
   }
   .container {
   width: 210mm;
