@@ -272,20 +272,16 @@
 </body>
 <script>
     
-    const form = document.forms['แบบสำรวจผู้แทน'];
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form)
-        }).then(response => {
-            alert('ส่งข้อมูลสำเร็จ');
-            form.reset();
-        }).catch(error => {
-            alert('เกิดข้อผิดพลาด กรุณาลองใหม่');
-            console.error('Error!', error.message);
-        });
-    });
+  document.forms['แบบสำรวจผู้แทน'].addEventListener('submit', e => {
+    e.preventDefault();
+    fetch("https://script.google.com/macros/s/AKfycbw-fL3fqR6QeTqlABQtz3A2S0gfn99sFDwYnv8SabOa8iujBfzexaxs6EMG3gaFGrKj/exec", {
+      method: "POST",
+      body: new FormData(e.target)
+    })
+    .then(res => res.text())
+    .then(data => alert("ส่งข้อมูลเรียบร้อยแล้ว"))
+    .catch(err => alert("เกิดข้อผิดพลาด"));
+  });
 
     // 1. Map ชื่อ → ตำแหน่ง
     const namePositionMap = {
