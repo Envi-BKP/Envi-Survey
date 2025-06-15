@@ -270,13 +270,18 @@
 
     </form>
 </body>
-<script>
-    
+<script> 
+
   document.forms['แบบสำรวจผู้แทน'].addEventListener('submit', e => {
     e.preventDefault();
-    fetch("https://script.google.com/macros/s/AKfycbw-fL3fqR6QeTqlABQtz3A2S0gfn99sFDwYnv8SabOa8iujBfzexaxs6EMG3gaFGrKj/exec", {
+
+    // แจ้งเตือนระหว่างรอ
+    alert("กำลังส่งข้อมูล...");
+
+      fetch("https://script.google.com/macros/s/AKfycbw-fL3fqR6QeTqlABQtz3A2S0gfn99sFDwYnv8SabOa8iujBfzexaxs6EMG3gaFGrKj/exec", {
       method: "POST",
       body: new FormData(e.target)
+    
     })
     .then(res => res.text())
     .then(data => alert("ส่งข้อมูลเรียบร้อยแล้ว"))
